@@ -22,7 +22,7 @@ namespace APIClientes.Controllers
         public IEnumerable<Cliente> GetByPartName(string name) => new ClienteRepository().ObterListaPorNome(name);
 
         [HttpPost]
-        public Cliente Post(Cliente cliente) => new ClienteRepository().Inserir(cliente);
+        public dynamic Post(Cliente cliente) => new ClienteRepository().Inserir(cliente);
 
         /*
         [HttpPost]

@@ -1,6 +1,7 @@
 ﻿using APIClientes.Entities;
 using Dapper;
 using System.Data.SqlClient;
+using W4G.Extensions.documents;
 
 namespace APIClientes.Repositories
 {
@@ -50,8 +51,13 @@ namespace APIClientes.Repositories
             }
         }
 
-        public Cliente Inserir(Cliente cliente)
+        public dynamic Inserir(Cliente cliente)
         {
+            string documento = cliente.CPF;
+
+            if (!documento.CpfIsValid())
+                return new { erro = new { mensagem = "CPF inválido"} };
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
